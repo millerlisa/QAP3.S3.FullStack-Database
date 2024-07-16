@@ -1,0 +1,1 @@
+UPDATE items SET name = 'Updated Name', description = 'Updated Descroption', price = 19.99 WHERE id = 1;

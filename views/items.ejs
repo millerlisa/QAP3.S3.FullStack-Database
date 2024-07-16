@@ -1,0 +1,26 @@
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        <div class="items content">
+            <form action="/items" method="POST">
+                <b>Items: </b></br> 
+            <% if (theItems.length > 0) { %>
+                <% theItems.forEach(item => { %>
+                    <b><%= item.item_name %> 
+                    <a href="/items/<%=item._id%>/edit?itemName=<%=item.item_name%">Edit</a>
+                    <a href="/items/<%=item._id%>/delete?itemName=<%=item.item_name%">Delete</a>
+                    <a href="/items/<%=item._id%>/replace?itemName=<%=item.item_name%">Replace</a></br> 
+                    <% }) %>
+            <% } %>
+            </br><label>Add Item:</label></br>
+            <label>Item Name:
+                <input type="text" id="itemName" name="itemName" value="<%= locals.itemName %>" required>
+            </label>
+            </br>
+            <button>POST</button>
+        </form>
+        </div>
+    </body>
+    <%- include('./partials/foot.ejs') %>
+</html>

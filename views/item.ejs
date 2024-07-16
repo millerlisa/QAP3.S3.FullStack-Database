@@ -1,0 +1,13 @@
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="actor content">
+      <h2>Item:</h2>
+      <% if (anItem.length > 0) var item = anItem[0];{ %>
+      <h3><%= actor.item_name %></h3>
+      <% } %>
+    </div>
+  </body>
+  <%- include('./partials/foot.ejs') %>
+</html>

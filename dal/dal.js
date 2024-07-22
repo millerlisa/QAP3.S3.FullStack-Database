@@ -2,8 +2,8 @@ const { Pool } = require("pg");
 const pool = new Pool({
   user: "me",
   host: "localhost",
-  database: "api",
-  password: "password",
+  database: "MarthasGoodEats",
+  password: "Keyin2021",
   port: 5432,
 });
 
@@ -31,9 +31,22 @@ const updateItem = async (id, name, description, price) => {
   return res.rows[0];
 };
 
+// Update partial item in the items table
+const patchItem = async (id, patchData) => {
+  const updates = [];
+  const values = [];
+  Object.keys(patchData).forEach((key, index) => {
+    updates.push(`${key} = $${index + 2}`);
+    values.push(patchData[key]);
+  });
+  values.push(id);
+  const query = `UPDATE items SET ${updates.join(", ")} WHERE id = $1`;
+  await pool.query(query, values);
+};
+
 // Delete an item from the items table
 const deleteItem = async (id) => {
   await pool.query("DELETE FROM items WHERE id = $1", [id]);
 };
 
-module.exports = { getItems, addItem, updateItem, deleteItem };
+module.exports = { getItems, addItem, updateItem, patchItem, deleteItem };

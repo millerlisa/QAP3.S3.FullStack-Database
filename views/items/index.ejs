@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Items</title>
+  </head>
+  <body>
+    <h1>Items</h1>
+    <br />
+    <a href="/items/new">Add New Item</a>
+    <ul>
+      <% items.forEach((item) => { %>
+      <li>
+        <strong><%= item.name %></strong>: <%= item.description %> - $<%=
+        item.price %>
+        <a href="items/<%= item.id %>/edit">Edit</a>
+        <form
+          action="/items/<%= item.id %>?_method=DELETE"
+          method="POST"
+          class="item-action-form"
+        >
+          <button type="submit" aria-label="Delete <%= item.name %>">
+            Delete
+          </button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>

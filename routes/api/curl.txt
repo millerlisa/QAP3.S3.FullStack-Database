@@ -1,0 +1,13 @@
+curl -d "name=pizza&description=tomato_sauce_with_fresh_tomatoes,_mozzarella cheese_and_basil&price=19.99" -X POST http://localhost:3000/api/items
+
+curl -d "name=pasta_alfredo&description=Creamy_sauce_made with_parmesan_cream_garlic_and_butter_served_with_fettuccine_pasta&price=17.99" -X POST http://localhost:3000/api/items/888
+
+curl -d"name=calamari_frittidescription=Calamari_served_with_garlic_aioli&price=21.99" -X POST http://localhost:3000/api/items/8023dacf-4c5d-4c37-a08e-b9a486de2c46
+
+curl -X GET http://localhost:3000/api/items/
+
+curl -X DELETE http://localhost:3000/api/items/888
+
+http://localhost:3000/api/items?name=pizza
+
+curl -d "username=johndoe&password=secret" -X PATCH http://localhost:3000/api/logins

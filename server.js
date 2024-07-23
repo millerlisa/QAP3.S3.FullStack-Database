@@ -1,63 +1,41 @@
 const express = require("express");
-const path = require("path");
 const methodOverride = require("method-override");
-const { Pool } = require("pg");
-const itemRoutes = require("./routes/items");
-
 const app = express();
+const port = 3000;
 
-// Load environment variables
-// require("dotenv").config();
+global.DEBUG = true;
 
-// Connect to the database
-const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "MarthasGoodEats",
-  password: "Keyin2021",
-  port: 5432,
-});
-// const pool = new Pool({
-//   user: process.env.DB_USER,
-//   host: process.env.DB_HOST,
-//   database: process.env.DB_NAME,
-//   password: process.env.DB_PASS,
-//   port: process.env.DB_PORT,
-// });
-
+const path = require("path");
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views/index"));
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, "public")));
-// app.use(express.json());
-// app.post("/items", async (req, res) => {
-//   const { name, description, price } = req.body;
-//   if (!name || !description || !price) {
-//     return res
-//       .status(400)
-//       .send("Name, description, and price fields are required.");
-//   }
-//   try {
-//     const newItem = await insertItemIntoDatabase(name, description, price);
-//     res.send(`New item created: ${newItem.name}`); // Or redirect, etc.
-//   } catch (error) {
-//     res.status(500).send("Server error creating item");
-//   }
-// });
 
-// Routes
-app.use("/items", itemRoutes(pool));
-
-app.get("/", (req, res) => {
-  res.redirect("/items");
+app.get("/", async (req, res) => {
+  res.render("items", { title: "Home" });
 });
 
 app.get("/about", (req, res) => {
-  res.redirect("/about");
+  res.render("about", { title: "About" });
 });
 
-// const PORT = process.env.PORT || 3000;
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+const itemsRouter = require("./routes/items");
+app.use("/items", itemsRouter);
+
+const loginsRouter = require("./routes/logins");
+app.use("/logins", loginsRouter);
+
+const usersRouter = require("./routes/users");
+app.use("/users", usersRouter);
+
+const apiRouter = require("./routes/api");
+app.use("/api", apiRouter);
+
+app.use((req, res) => {
+  res.status(404).render("404", { title: "404" });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });

@@ -1,5 +1,5 @@
 -- update_item.sql
-UPDATE public.items
-	SET name=$1, description=$2, price=$3
-	WHERE id=$4
+UPDATE public."items"
+	SET price= 21.99
+	WHERE id=4
 	RETURNING *;

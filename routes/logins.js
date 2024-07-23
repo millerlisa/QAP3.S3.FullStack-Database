@@ -1,6 +1,6 @@
 const express = require("express");
 const router = require("express").Router();
-const loginsDal = require("../../services/pg.logins.dal");
+const loginsDal = require("../services/pg.logins.dal");
 
 router.get("/", async (req, res) => {
   try {

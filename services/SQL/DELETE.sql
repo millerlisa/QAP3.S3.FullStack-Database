@@ -1,4 +1,4 @@
 -- delete_item.sql
-DELETE FROM public.items
-	WHERE id = $1 
+DELETE FROM public.menu_items
+	WHERE available = false
 	RETURNING *;

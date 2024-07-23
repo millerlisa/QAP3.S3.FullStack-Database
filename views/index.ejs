@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <title>Items</title>
-  </head>
+  <%- include('./partials/head.ejs')%>
   <body>
-    <h1>Items</h1>
+    <%- include('./partials/nav.ejs') %>
+    <h1>Menu Items</h1>
     <br />
     <a href="/items/new">Add New Item</a>
     <ul>
@@ -29,4 +25,5 @@
       <% }) %>
     </ul>
   </body>
+  <%- include('./partials/foot.ejs') %>
 </html>
